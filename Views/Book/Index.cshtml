@@ -1,0 +1,54 @@
+﻿@model System.Data.DataTable
+
+@{
+    ViewData["Title"] = "List of Books";
+}
+
+<div class="jumbotron py-4 mb-2" style="background-color: lightcyan;">
+    <h1 class="text-center" style="color: darkblue; font-weight: bold;">
+        @ViewData["Title"]
+    </h1>
+</div>
+
+<div class="d-flex justify-content-end mb-2">
+    <a asp-action="AddOrEdit" class="btn btn-primary btn-sm">Create New</a>
+</div>
+
+<table class="table table-bordered">
+    <thead style="background-color: lightblue;">
+        <tr>
+            <th>
+                Book Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Price (RM)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Rows.Count; i++) {
+                <tr>
+                    <td>
+                        @Model.Rows[i]["Title"]
+                    </td>
+                    <td>
+                        @Model.Rows[i]["Author"]
+                    </td>
+                    <td>
+                        @Model.Rows[i]["Price"]
+                    </td>
+                    <td>
+                    <a asp-action="AddOrEdit" asp-route-id="@Model.Rows[i]["BookID"]" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@Model.Rows[i]["BookID"]" class="btn btn-danger btn-sm">Delete</a>
+
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
